@@ -2,11 +2,16 @@ import { z } from "zod";
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
 import { handle } from "hono/vercel";
-import { authRoutes } from "@/libs"
+import { authRoutes } from "@/libs/rpc"
+import { cors } from "hono/cors";
+import { logger } from "hono/logger";
 
 export const runtime = "edge";
 
-const app = new Hono().basePath("/api");
+const app = new Hono()
+    .basePath("/api")
+    .use("*", logger())
+    .use("*", cors());
 
 const routes = app.route("/auth", authRoutes);
 
