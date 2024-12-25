@@ -1,4 +1,4 @@
-import { createClient } from "@/libs/supabase/client";
+import { createSupabaseServerClient } from "@/libs/supabase/server";
 import { type MiddlewareHandler } from "hono";
 import { getCookie } from "hono/cookie";
 import { HTTPException } from "hono/http-exception";
@@ -6,7 +6,7 @@ import { HTTPException } from "hono/http-exception";
 const authMiddleware: MiddlewareHandler = async (c, next) => {
     const refresh_token = getCookie(c, "refresh_token");
     const access_token = getCookie(c, "access_token");
-    const supabase = createClient()
+    const supabase = createSupabaseServerClient(c)
     const { data, error } = await supabase.auth.getUser(access_token);
 
     if (data.user) {

@@ -1,5 +1,3 @@
-import { z } from "zod";
-import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
 import { handle } from "hono/vercel";
 import { authRoutes } from "@/libs/rpc"

@@ -1,4 +1,3 @@
-'use client'
 import { createSupabaseBrowserClient } from "@/libs/supabase/client";
 
 export default function Home() {
@@ -7,7 +6,7 @@ export default function Home() {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: 'http://localhost:3000/api/auth/sign-in-with-provider',
+        redirectTo: 'http://localhost:3000/auth/callback',
       },
     })
   }
