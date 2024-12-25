@@ -6,7 +6,7 @@ import { HTTPException } from "hono/http-exception";
 const authMiddleware: MiddlewareHandler = async (c, next) => {
     const refresh_token = getCookie(c, "refresh_token");
     const access_token = getCookie(c, "access_token");
-    const supabase = createSupabaseServerClient(c)
+    const supabase = await createSupabaseServerClient()
     const { data, error } = await supabase.auth.getUser(access_token);
 
     if (data.user) {

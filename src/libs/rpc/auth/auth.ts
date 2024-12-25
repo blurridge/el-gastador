@@ -10,7 +10,7 @@ const authRoutes = new Hono()
             const code = c.req.query("code")
             const next = c.req.query("next")
             if (code) {
-                const supabase = createSupabaseServerClient(c)
+                const supabase = await createSupabaseServerClient()
                 const { data, error } = await supabase.auth.exchangeCodeForSession(code)
                 if (error) {
                     console.error("Error while signing in with Provider ", error);
@@ -26,9 +26,9 @@ const authRoutes = new Hono()
             return c.redirect("/")
         },
     )
-    .post(
+    .get(
         "/sign-out", async (c) => {
-            const supabase = createSupabaseServerClient(c)
+            const supabase = await createSupabaseServerClient()
             const { error } = await supabase.auth.signOut()
             if (error) {
                 console.error("Error while signing out with Provider ", error);
@@ -44,6 +44,7 @@ const authRoutes = new Hono()
                 secure: true,
             })
             deleteCookie(c, "user_data")
+            return c.redirect("/")
         },
     )
 

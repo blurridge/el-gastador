@@ -1,7 +1,8 @@
-import { createSupabaseBrowserClient } from '@/libs/supabase/client'
+import SignOut from '@/components/SignOut'
+import { createSupabaseServerClient } from '@/libs/supabase/server'
 
 export default async function PrivatePage() {
-  const supabase = createSupabaseBrowserClient()
+  const supabase = await createSupabaseServerClient()
 
   const { data, error } = await supabase.auth.getUser()
   console.log(data)
@@ -9,5 +10,5 @@ export default async function PrivatePage() {
     console.log(error)
   }
 
-  return <p>Hello {data.user?.email ?? "NONE"}</p>
+  return (<><div><p>Hello {data.user?.email ?? "NONE"}</p><SignOut /></div></>)
 }
