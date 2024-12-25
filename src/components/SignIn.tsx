@@ -1,5 +1,5 @@
 'use client'
-import { createSupabaseBrowserClient } from "@/libs/supabase/client"
+import { createSupabaseBrowserClient } from "@/lib/supabase/client"
 
 const SignIn = () => {
     const handleLogin = async () => {

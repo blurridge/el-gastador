@@ -1,4 +1,4 @@
-import { createSupabaseServerClient } from "@/libs/supabase/server";
+import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { type MiddlewareHandler } from "hono";
 import { getCookie } from "hono/cookie";
 import { HTTPException } from "hono/http-exception";

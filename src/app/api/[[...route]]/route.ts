@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { handle } from "hono/vercel";
-import { authRoutes } from "@/libs/rpc"
+import { authRoutes } from "@/lib/rpc"
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
 

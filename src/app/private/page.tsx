@@ -1,5 +1,5 @@
 import SignOut from '@/components/SignOut'
-import { createSupabaseServerClient } from '@/libs/supabase/server'
+import { createSupabaseServerClient } from '@/lib/supabase/server'
 
 export default async function PrivatePage() {
   const supabase = await createSupabaseServerClient()

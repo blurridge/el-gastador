@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { HTTPException } from "hono/http-exception";
 import { deleteCookie, setCookie } from "hono/cookie";
-import { createSupabaseServerClient } from "@/libs/supabase/server";
+import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 const authRoutes = new Hono()
     .get(
