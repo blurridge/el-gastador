@@ -1,8 +1,6 @@
 'use client'
 import { useState, useCallback } from 'react'
 import { createSupabaseBrowserClient } from '@/lib/supabase/client'
-import { generateUrl } from '@/utils/generateUrl'
-import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import client from '@/lib/rpc/client/hono-client';
 

@@ -4,7 +4,6 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { createResponse } from "@/utils/createResponse";
 import { RESPONSE_STATUS } from "@/utils/constants";
 import { generateUrl } from "@/utils/generateUrl";
-import { redirect } from "next/navigation";
 
 const authRoutes = new Hono()
     .get(
