@@ -1,16 +1,14 @@
 'use client'
-import { useState, useCallback } from 'react'
-import { createSupabaseBrowserClient } from '@/lib/supabase/client'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation';
 import client from '@/lib/rpc/client/hono-client';
 
 export const useAuth = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const supabase = createSupabaseBrowserClient()
   const router = useRouter()
 
-  const signInWithGoogle = useCallback(async () => {
+  const signInWithGoogle = async () => {
     setIsLoading(true)
     setError(null)
     try {
@@ -26,9 +24,9 @@ export const useAuth = () => {
     } finally {
       setIsLoading(false)
     }
-  }, [supabase])
+  }
 
-  const signOut = useCallback(async () => {
+  const signOut = async () => {
     setIsLoading(true)
     setError(null)
     try {
@@ -42,7 +40,7 @@ export const useAuth = () => {
     } finally {
       setIsLoading(false)
     }
-  }, [supabase])
+  }
 
   return { signInWithGoogle, signOut, isLoading, error }
 }

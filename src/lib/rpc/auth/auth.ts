@@ -4,6 +4,7 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { createResponse } from "@/utils/createResponse";
 import { RESPONSE_STATUS } from "@/utils/constants";
 import { generateUrl } from "@/utils/generateUrl";
+import { deleteCookie, setCookie } from "hono/cookie";
 
 const authRoutes = new Hono()
     .get(
@@ -28,11 +29,24 @@ const authRoutes = new Hono()
             const code = c.req.query("code")
             if (code) {
                 const supabase = await createSupabaseServerClient()
-                const { error } = await supabase.auth.exchangeCodeForSession(code)
+                const { data, error } = await supabase.auth.exchangeCodeForSession(code)
                 if (error) {
                     console.error("Error while signing in with Provider", error);
                     throw new HTTPException(401, { message: error.message });
                 }
+                setCookie(c, "access_token", data?.session.access_token, {
+                    ...(data?.session.expires_at && { expires: new Date(data.session.expires_at) }),
+                    httpOnly: true,
+                    path: "/",
+                    secure: true,
+                });
+
+                setCookie(c, "refresh_token", data?.session.refresh_token, {
+                    ...(data?.session.expires_at && { expires: new Date(data.session.expires_at) }),
+                    httpOnly: true,
+                    path: "/",
+                    secure: true,
+                });
                 return c.redirect("/home")
             }
             return c.redirect("/login")
@@ -46,6 +60,8 @@ const authRoutes = new Hono()
                 console.error("Error while signing out", error);
                 throw new HTTPException(401, { message: error.message });
             }
+            deleteCookie(c, "access_token")
+            deleteCookie(c, "refresh_token")
             return c.json(createResponse({ status: RESPONSE_STATUS.SUCCESS, message: "User signed out successfully!" }));
         },
     )
