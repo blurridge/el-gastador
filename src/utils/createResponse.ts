@@ -1,13 +1,14 @@
-import { responseSchema, ResponseSchemaType } from "@/types/schema";
+import { ResponseSchema, ResponseSchemaType } from "@/types/schema";
+import { RESPONSE_STATUS } from "./constants";
 
 export const createResponse = ({ status, message, data }: ResponseSchemaType) => {
   const response = { status, message, data };
   try {
-    responseSchema.parse(response); // Validate response against schema
+    ResponseSchema.parse(response); // Validate response against schema
   } catch (error) {
     console.error("Response validation failed:", error);
     return {
-      status: "error",
+      status: RESPONSE_STATUS.FAIL,
       message: "Response validation failed",
       data: null
     };

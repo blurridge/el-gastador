@@ -18,19 +18,19 @@ import {
 } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Separator } from "@/components/ui/separator"
-import { loginSchema, loginSchemaType } from '@/types/schema'
+import { LoginSchema, LoginSchemaType } from '@/types/schema'
 import { useForm } from 'react-hook-form'
 import GoogleSignIn from './GoogleSignIn'
 
 const LoginCard = () => {
-    const form = useForm<loginSchemaType>({
-        resolver: zodResolver(loginSchema),
+    const form = useForm<LoginSchemaType>({
+        resolver: zodResolver(LoginSchema),
         defaultValues: {
             email: "",
             password: ""
         },
     });
-    const onSubmit = (values: loginSchemaType) => {
+    const onSubmit = (values: LoginSchemaType) => {
         console.log(values);
     }
     return (
