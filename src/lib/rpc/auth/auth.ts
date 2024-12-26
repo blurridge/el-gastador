@@ -33,5 +33,16 @@ const authRoutes = new Hono()
             return c.json(createResponse({ status: RESPONSE_STATUS.SUCCESS, message: "User signed out successfully!" }));
         },
     )
+    .get(
+        "/get-user", async (c) => {
+            const supabase = await createSupabaseServerClient()
+            const { data: { user }, error } = await supabase.auth.getUser()
+            if (error) {
+                console.error("Error getting user", error);
+                throw new HTTPException(401, { message: error.message });
+            }
+            return c.json(createResponse({ status: RESPONSE_STATUS.SUCCESS, message: "User data fetched successfully!", data: user }));
+        }
+    )
 
 export default authRoutes;
