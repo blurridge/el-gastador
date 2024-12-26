@@ -1,13 +1,10 @@
 'use client'
-const SignOut = () => {
-    const handleSignOut = async () => {
-        const response = await fetch("http://localhost:3000/api/auth/sign-out");
-        if (!response.ok) {
-            throw new Error(`Response status: ${response.status}`);
-        }
-    }
+import { useAuth } from "@/hooks/useAuth";
 
-    return <button onClick={handleSignOut}>Sign out</button>
+const SignOut = () => {
+    const { signOut, isLoading, error } = useAuth()
+
+    return <button onClick={signOut}>Sign out</button>
 }
 
 export default SignOut;

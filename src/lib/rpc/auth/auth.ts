@@ -2,6 +2,8 @@ import { Hono } from "hono";
 import { HTTPException } from "hono/http-exception";
 import { deleteCookie, setCookie } from "hono/cookie";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { createResponse } from "@/utils/createResponse";
+import { RESPONSE_STATUS } from "@/utils/constants";
 
 const authRoutes = new Hono()
     .get(
@@ -16,14 +18,10 @@ const authRoutes = new Hono()
                     console.error("Error while signing in with Provider ", error);
                     throw new HTTPException(401, { message: error.message });
                 }
-
-                setCookie(c, "access_token", data.session.access_token);
-                setCookie(c, "refresh_token", data.session.refresh_token);
                 setCookie(c, "user_data", JSON.stringify(data.user))
-
-                return c.redirect("/private");
+                return c.redirect("/home") 
             }
-            return c.redirect("/")
+            return c.redirect("/login")
         },
     )
     .get(
@@ -34,17 +32,8 @@ const authRoutes = new Hono()
                 console.error("Error while signing out with Provider ", error);
                 throw new HTTPException(401, { message: error.message });
             }
-
-            deleteCookie(c, 'access_token', {
-                path: '/',
-                secure: true,
-            })
-            deleteCookie(c, 'refresh_token', {
-                path: '/',
-                secure: true,
-            })
             deleteCookie(c, "user_data")
-            return c.redirect("/")
+            return c.json(createResponse({ status: RESPONSE_STATUS.SUCCESS, message: "User signed out successfully!" }));
         },
     )
 

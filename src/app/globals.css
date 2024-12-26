@@ -1,17 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-  
+
 :root {
   --main: #a388ee;
-  --overlay: rgba(0, 0, 0, 0.8); /* background color overlay for alert dialogs, modals, etc. */
+  --overlay: rgba(0, 0, 0, 0.8);
+  /* background color overlay for alert dialogs, modals, etc. */
 
   --bg: #e3dff2;
-  --bw: #fff; /* white and secondary black e.g. utility class variant would be: bg-[#fff] dark:bg-[#212121] */
-  --blank: #000; /* blank black and white */
+  --bw: #fff;
+  /* white and secondary black e.g. utility class variant would be: bg-[#fff] dark:bg-[#212121] */
+  --blank: #000;
+  /* blank black and white */
   --border: #000;
   --text: #000;
-  --mtext: #000; /* text that is placed on background with main color e.g. text color of default button */
+  --mtext: #000;
+  /* text that is placed on background with main color e.g. text color of default button */
   --ring: #000;
   --ring-offset: #fff;
 
@@ -37,4 +41,15 @@
   --ring-offset: #000;
 
   --shadow: var(--box-shadow-x) var(--box-shadow-y) 0px 0px var(--border);
+}
+
+body {
+  --dot-bg: #FFFFFF;
+  --dot-color: #9ca3af;
+  --dot-size: 2px;
+  --dot-space: 50px;
+  background:
+    linear-gradient(90deg, var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
+    linear-gradient(var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
+    var(--dot-color);
 }
