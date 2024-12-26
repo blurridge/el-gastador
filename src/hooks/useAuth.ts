@@ -4,6 +4,7 @@ import { createSupabaseBrowserClient } from '@/lib/supabase/client'
 import { generateUrl } from '@/utils/generateUrl'
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import client from '@/lib/rpc/client/hono-client';
 
 export const useAuth = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -15,16 +16,13 @@ export const useAuth = () => {
     setIsLoading(true)
     setError(null)
     try {
-      await supabase.auth.signInWithOAuth({
-        provider: 'google',
-        options: {
-          redirectTo: generateUrl('/api/auth/sign-in-with-provider'),
-          queryParams: {
-            access_type: 'offline', // Request refresh token
-            prompt: 'consent', // Forces re-prompt to get a new provider_token
-          },
-        },
-      })
+      const response = await client.api.auth['sign-in-with-provider'].$get()
+      if (response.ok) {
+        const { data: url } = await response.json();
+        if (url) {
+          router.push(url)
+        }
+      }
     } catch (error) {
       setError((error as Error).message)
     } finally {
@@ -36,12 +34,10 @@ export const useAuth = () => {
     setIsLoading(true)
     setError(null)
     try {
-      const response = await axios.get(generateUrl('/api/auth/sign-out'))
-      if (response.status !== 200) {
-        throw new Error(`Response status: ${response.status}`)
+      const response = await client.api.auth['sign-out'].$get()
+      if (response.ok) {
+        router.push("/login")
       }
-      await supabase.auth.signOut()
-      router.push("/login")
     } catch (error) {
       console.log(error)
       setError((error as Error).message)
