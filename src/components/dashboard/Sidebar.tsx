@@ -33,7 +33,7 @@ const items = [
 
 const AppSidebar = () => {
     const { signOut, isLoading, error } = useAuth()
-    const { user, updateCurrentUser } = useUserStore()
+    const { user, userProfile, updateCurrentUser } = useUserStore()
     const { isMobile } = useSidebar();
 
     useEffect(() => {

@@ -11,18 +11,18 @@ import { eq } from "drizzle-orm";
 
 const profileRoutes = new Hono()
     .use("*", authMiddleware)
-    .get("get-user-profile", zValidator('json', GetProfileSchema, (result, c) => {
+    .get("get-user-profile", zValidator('query', GetProfileSchema, (result, c) => {
         if (!result.success) {
             throw new HTTPException(401, { message: result.error.toString() });
         }
     }),
         async (c) => {
-            const { id: userId } = c.req.valid('json')
+            const { id: userId } = c.req.valid('query')
             const profileData = await db.select().from(userProfiles).where(eq(userProfiles.id, userId))
-            if (!profileData) {
+            if (!profileData || !profileData.length) {
                 return c.json(createResponse({ status: RESPONSE_STATUS.FAIL, message: "No user profile available.", data: null }))
             }
             return c.json(createResponse({ status: RESPONSE_STATUS.SUCCESS, message: "Fetched user profile successfully!", data: profileData }))
         })
-    .post("update-user-profile")
+
 export default profileRoutes;

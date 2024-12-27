@@ -15,6 +15,13 @@
       "when": 1735008275540,
       "tag": "0001_solid_tempest",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1735320368110,
+      "tag": "0002_dapper_mister_sinister",
+      "breakpoints": true
     }
   ]
 }

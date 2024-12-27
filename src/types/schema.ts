@@ -1,5 +1,7 @@
 import { RESPONSE_STATUS } from '@/utils/constants';
 import { z } from 'zod'
+import { createSelectSchema } from 'drizzle-zod';
+import { userProfiles } from '@/db/schema';
 
 export const LoginSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -21,3 +23,7 @@ export const GetProfileSchema = z.object({
 })
 
 export type GetProfileSchemaType = z.infer<typeof GetProfileSchema>;
+
+export const UserProfileSchema = createSelectSchema(userProfiles)
+
+export type UserProfile = z.infer<typeof UserProfileSchema>;
