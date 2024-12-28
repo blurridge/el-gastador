@@ -1,5 +1,5 @@
 'use client'
-import { Home, Settings, LogOut } from "lucide-react"
+import { Home, Settings, LogOut, HandCoins, Coins } from "lucide-react"
 import {
     Sidebar,
     SidebarContent,
@@ -23,6 +23,16 @@ const items = [
         title: "Home",
         url: "#",
         icon: Home,
+    },
+    {
+        title: "Transactions",
+        url: "transactions",
+        icon: Coins,
+    },
+    {
+        title: "Debt",
+        url: "debt",
+        icon: HandCoins
     },
     {
         title: "Settings",

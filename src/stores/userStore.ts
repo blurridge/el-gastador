@@ -15,7 +15,6 @@ type Action = {
   updateCurrentUser: () => Promise<void>
 }
 
-
 const useUserStore = create<State & Action>((set) => ({
   user: null,
   userProfile: null,

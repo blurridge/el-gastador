@@ -1,7 +1,7 @@
 import { RESPONSE_STATUS } from '@/utils/constants';
 import { z } from 'zod'
 import { createInsertSchema, createSelectSchema, createUpdateSchema } from 'drizzle-zod';
-import { userProfiles } from '@/db/schema';
+import { transactions, userProfiles } from '@/db/schema';
 
 export const LoginSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -39,3 +39,17 @@ export const PartialUpdateUserProfileSchema = z.object({
 })
 
 export type PartialUpdateUserProfileType = z.infer<typeof PartialUpdateUserProfileSchema>
+
+export const GetTransactionSchema = z.object({
+  id: z.string().uuid({ message: "Invalid UUID" })
+})
+
+export type GetTransactionType = z.infer<typeof GetTransactionSchema>;
+
+export const TransactionSchema = createSelectSchema(transactions)
+export const TransactionInsertSchema = createInsertSchema(transactions);
+export const TransactionUpdateSchema = createUpdateSchema(transactions);
+
+export type TransactionType = z.infer<typeof TransactionSchema>;
+export type TransactionInsertType = z.infer<typeof TransactionInsertSchema>;
+export type TransactionUpdateType = z.infer<typeof TransactionUpdateSchema>;
