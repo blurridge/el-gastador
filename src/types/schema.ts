@@ -1,6 +1,6 @@
 import { RESPONSE_STATUS } from '@/utils/constants';
 import { z } from 'zod'
-import { createSelectSchema } from 'drizzle-zod';
+import { createInsertSchema, createSelectSchema, createUpdateSchema } from 'drizzle-zod';
 import { userProfiles } from '@/db/schema';
 
 export const LoginSchema = z.object({
@@ -8,7 +8,7 @@ export const LoginSchema = z.object({
   password: z.string().min(2, { message: 'Password must be at least 2 characters.' })
 })
 
-export type LoginSchemaType = z.infer<typeof LoginSchema>;
+export type LoginType = z.infer<typeof LoginSchema>;
 
 export const ResponseSchema = z.object({
   status: z.enum([RESPONSE_STATUS.SUCCESS, RESPONSE_STATUS.FAIL]),
@@ -16,14 +16,26 @@ export const ResponseSchema = z.object({
   data: z.any().nullable()
 });
 
-export type ResponseSchemaType = z.infer<typeof ResponseSchema>;
+export type ResponseType = z.infer<typeof ResponseSchema>;
 
 export const GetProfileSchema = z.object({
   id: z.string().uuid({ message: "Invalid UUID" })
 })
 
-export type GetProfileSchemaType = z.infer<typeof GetProfileSchema>;
+export type GetProfileType = z.infer<typeof GetProfileSchema>;
 
 export const UserProfileSchema = createSelectSchema(userProfiles)
+export const UserProfileInsertSchema = createInsertSchema(userProfiles);
+export const UserProfileUpdateSchema = createUpdateSchema(userProfiles);
 
-export type UserProfile = z.infer<typeof UserProfileSchema>;
+export type UserProfileType = z.infer<typeof UserProfileSchema>;
+export type UserProfileInsertType = z.infer<typeof UserProfileInsertSchema>;
+export type UserProfileUpdateType = z.infer<typeof UserProfileUpdateSchema>;
+
+export const PartialUpdateUserProfileSchema = z.object({
+  id: z.string().uuid({ message: "Invalid UUID" }),
+  email: z.string().email({ message: "Invalid email address" }),
+  displayName: z.string().min(2, { message: "Display name must be at least 2 characters." }),
+})
+
+export type PartialUpdateUserProfileType = z.infer<typeof PartialUpdateUserProfileSchema>

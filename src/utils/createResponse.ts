@@ -1,7 +1,7 @@
-import { ResponseSchema, ResponseSchemaType } from "@/types/schema";
+import { ResponseSchema, ResponseType } from "@/types/schema";
 import { RESPONSE_STATUS } from "./constants";
 
-export const createResponse = ({ status, message, data }: ResponseSchemaType) => {
+export const createResponse = ({ status, message, data }: ResponseType) => {
   const response = { status, message, data };
   try {
     ResponseSchema.parse(response); // Validate response against schema

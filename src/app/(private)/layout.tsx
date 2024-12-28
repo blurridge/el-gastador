@@ -1,12 +1,14 @@
 import { ReactNode } from "react";
-import { SidebarProvider, SidebarTrigger, useSidebar } from "@/components/ui/sidebar"
+import { SidebarProvider } from "@/components/ui/sidebar"
 import AppSidebar from "@/components/dashboard/Sidebar";
+import ProfileSetup from "@/components/dashboard/ProfileSetup";
 
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <SidebarProvider>
       <AppSidebar />
       <main>
+        <ProfileSetup />
         {children}
       </main>
     </SidebarProvider>

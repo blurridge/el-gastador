@@ -4,7 +4,7 @@ import { createResponse } from "@/utils/createResponse";
 import { RESPONSE_STATUS } from "@/utils/constants";
 import authMiddleware from "../middleware/authMiddleware";
 import { zValidator } from '@hono/zod-validator'
-import { GetProfileSchema } from "@/types/schema";
+import { GetProfileSchema, PartialUpdateUserProfileSchema } from "@/types/schema";
 import { db } from "@/db";
 import { userProfiles } from "@/db/schema";
 import { eq } from "drizzle-orm";
@@ -22,7 +22,23 @@ const profileRoutes = new Hono()
             if (!profileData || !profileData.length) {
                 return c.json(createResponse({ status: RESPONSE_STATUS.FAIL, message: "No user profile available.", data: null }))
             }
-            return c.json(createResponse({ status: RESPONSE_STATUS.SUCCESS, message: "Fetched user profile successfully!", data: profileData }))
+            return c.json(createResponse({ status: RESPONSE_STATUS.SUCCESS, message: "Fetched user profile successfully!", data: profileData[0] }))
         })
+    .post("update-user-profile", zValidator('json', PartialUpdateUserProfileSchema),
+        async (c) => {
+            const validatedUserProfilePayload = c.req.valid('json')
+            const updatedUserProfile = await db.insert(userProfiles)
+                .values(validatedUserProfilePayload)
+                .onConflictDoUpdate({
+                    target: userProfiles.id,
+                    set: {
+                        displayName: validatedUserProfilePayload.displayName,
+                        updatedAt: new Date()
+                    }
+                })
+                .returning();
+            return c.json(createResponse({ status: RESPONSE_STATUS.SUCCESS, message: "User profile updated successfully!", data: updatedUserProfile }))
+        }
+    )
 
 export default profileRoutes;

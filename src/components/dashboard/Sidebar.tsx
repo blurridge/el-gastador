@@ -77,7 +77,7 @@ const AppSidebar = () => {
                                                 className="w-6 h-6 rounded-full"
                                             />
                                                 : null}
-                                            <span>{user?.user_metadata?.full_name}</span>
+                                            <span>{(userProfile) ? userProfile.displayName : user?.user_metadata?.full_name}</span>
                                         </a>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>

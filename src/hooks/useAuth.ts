@@ -1,9 +1,9 @@
 'use client'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation';
-import client from '@/lib/rpc/client/hono-client';
 import { parseApiResponse } from '@/utils/parseResponse';
 import { RESPONSE_STATUS } from '@/utils/constants';
+import honoClient from '@/lib/rpc/client/hono-client';
 
 export const useAuth = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -14,7 +14,7 @@ export const useAuth = () => {
     setIsLoading(true)
     setError(null)
     try {
-      const response = await parseApiResponse(client.api.auth['sign-in-with-provider'].$get())
+      const response = await parseApiResponse(honoClient.api.auth['sign-in-with-provider'].$get())
       if (response.status === RESPONSE_STATUS.SUCCESS) {
         router.push(response.data)
       }
@@ -29,7 +29,7 @@ export const useAuth = () => {
     setIsLoading(true)
     setError(null)
     try {
-      const response = await parseApiResponse(client.api.auth['sign-out'].$get())
+      const response = await parseApiResponse(honoClient.api.auth['sign-out'].$get())
       if (response.status === RESPONSE_STATUS.SUCCESS) {
         router.push("/login")
       }
