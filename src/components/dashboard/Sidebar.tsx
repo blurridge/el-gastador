@@ -1,5 +1,5 @@
 'use client'
-import { Calendar, Home, Inbox, Search, Settings, LogOut } from "lucide-react"
+import { Home, Settings, LogOut } from "lucide-react"
 import {
     Sidebar,
     SidebarContent,
@@ -16,7 +16,7 @@ import {
 import { useAuth } from "@/hooks/useAuth"
 import useUserStore from "@/stores/userStore"
 import { useEffect } from "react"
-import Image from "next/image"
+import ProfileSetup from "./ProfileSetup"
 
 const items = [
     {
@@ -33,7 +33,7 @@ const items = [
 
 const AppSidebar = () => {
     const { signOut, isLoading, error } = useAuth()
-    const { user, userProfile, updateCurrentUser } = useUserStore()
+    const { updateCurrentUser } = useUserStore()
     const { isMobile } = useSidebar();
 
     useEffect(() => {
@@ -68,17 +68,7 @@ const AppSidebar = () => {
                             <SidebarMenu>
                                 <SidebarMenuItem key={"Account Details"}>
                                     <SidebarMenuButton asChild>
-                                        <a className="cursor-pointer">
-                                            {user?.user_metadata.picture ? <Image
-                                                width={200}
-                                                height={200}
-                                                src={user?.user_metadata.picture}
-                                                alt={user?.user_metadata?.full_name}
-                                                className="w-6 h-6 rounded-full"
-                                            />
-                                                : null}
-                                            <span>{(userProfile) ? userProfile.displayName : user?.user_metadata?.full_name}</span>
-                                        </a>
+                                        <ProfileSetup editMode={true} />
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
                                 <SidebarMenuItem key={"Sign Out"}>
