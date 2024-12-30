@@ -14,7 +14,7 @@ import {
     useSidebar,
 } from "@/components/ui/sidebar"
 import ProfileSetup from "./ProfileSetup"
-import { useSignOut } from "@/features/auth/useAuth"
+import { useSignOut } from "@/features/auth"
 
 const items = [
     {

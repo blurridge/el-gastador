@@ -2,7 +2,7 @@
 import { Button } from '@/components/ui/button'
 import googleIcon from "@/assets/icons/google_icon.svg"
 import Image from 'next/image'
-import { useGoogleSignIn } from '@/features/auth/useAuth'
+import { useGoogleSignIn } from '@/features/auth'
 
 const GoogleSignIn = () => {
     const { refetch: signInWithGoogle } = useGoogleSignIn();
