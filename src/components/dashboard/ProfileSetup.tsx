@@ -16,13 +16,9 @@ import {
     FormMessage,
 } from '@/components/ui/form'
 import { Input } from "@/components/ui/input"
-import { useToast } from "@/hooks/use-toast"
-import honoClient from "@/lib/rpc/client/hono-client"
+import { useGetUserInfo, useGetUserProfile, useUpdateUserProfile } from "@/features/user"
 import { cn } from "@/lib/utils"
-import useUserStore from "@/stores/userStore";
 import { PartialUpdateUserProfileSchema, PartialUpdateUserProfileType } from "@/types/schema";
-import { RESPONSE_STATUS } from "@/utils/constants"
-import { parseApiResponse } from "@/utils/parseResponse"
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DialogTrigger } from "@radix-ui/react-dialog"
 import Image from "next/image"
@@ -31,8 +27,9 @@ import { useForm } from "react-hook-form";
 
 const ProfileSetup = ({ editMode }: { editMode?: boolean }) => {
     const [open, setOpen] = useState(false);
-    const { toast } = useToast()
-    const { user, userProfile, isLoadingUser, updateCurrentUser } = useUserStore()
+    const { data: user, isLoading: isLoadingUser } = useGetUserInfo();
+    const { data: userProfile, isLoading: isLoadingUserProfile } = useGetUserProfile(user!);
+    const { mutate: updateUserProfile, isPending: isPendingProfileUpdate } = useUpdateUserProfile(user!);
     const form = useForm<PartialUpdateUserProfileType>({
         resolver: zodResolver(PartialUpdateUserProfileSchema),
         defaultValues: {
@@ -59,24 +56,12 @@ const ProfileSetup = ({ editMode }: { editMode?: boolean }) => {
         }
     }, [user, userProfile])
 
-    const onSubmit = async (userProfilePayload: PartialUpdateUserProfileType) => {
-        if (!user) {
-            return;
-        }
-        const response = await parseApiResponse(honoClient.api.profile["update-user-profile"].$post({
-            json: userProfilePayload
-        }))
-        if (response.status === RESPONSE_STATUS.SUCCESS) {
-            updateCurrentUser();
-            toast({ title: response.message, description: `User profile updated for ${user.id}.` })
-            setOpen(false);
-        }
-        else {
-            toast({ variant: "destructive", title: response.message, description: `Failed updating user profile for ${user.id}.` })
-        }
+    const onSubmit = (userProfilePayload: PartialUpdateUserProfileType) => {
+        updateUserProfile(userProfilePayload)
+        setOpen(false)
     }
 
-    if (isLoadingUser) {
+    if (isLoadingUser || isLoadingUserProfile || isPendingProfileUpdate) {
         return null;
     }
 

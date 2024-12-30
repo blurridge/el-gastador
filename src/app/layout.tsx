@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import { Public_Sans } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
+import QueryProvider from "@/providers/query-provider";
 
 const publicSans = Public_Sans({
   subsets: ["latin"],
 });
+
 
 export const metadata: Metadata = {
   title: "El Gastador",
@@ -22,8 +24,10 @@ export default function RootLayout({
       <body
         className={`${publicSans.className} ${publicSans.className} antialiased`}
       >
-        {children}
-        <Toaster />
+        <QueryProvider>
+          {children}
+          <Toaster />
+        </QueryProvider>
       </body>
     </html>
   );

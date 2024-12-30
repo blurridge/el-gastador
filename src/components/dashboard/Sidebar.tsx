@@ -13,10 +13,8 @@ import {
     SidebarTrigger,
     useSidebar,
 } from "@/components/ui/sidebar"
-import { useAuth } from "@/hooks/useAuth"
 import ProfileSetup from "./ProfileSetup"
-import useUserStore from "@/stores/userStore"
-import { useEffect } from "react"
+import { useSignOut } from "@/features/auth/useAuth"
 
 const items = [
     {
@@ -42,15 +40,8 @@ const items = [
 ]
 
 const AppSidebar = () => {
-    const { signOut, isLoading, error } = useAuth()
     const { isMobile } = useSidebar();
-    const { updateCurrentUser } = useUserStore();
-
-    useEffect(() => {
-        if (!localStorage.getItem("currentUser")) {
-            updateCurrentUser();
-        }
-    }, [])
+    const { refetch: signOut } = useSignOut();
 
     return (
         <>
@@ -84,7 +75,7 @@ const AppSidebar = () => {
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
                                 <SidebarMenuItem key={"Sign Out"}>
-                                    <SidebarMenuButton onClick={signOut} asChild>
+                                    <SidebarMenuButton onClick={() => signOut()} asChild>
                                         <a className="cursor-pointer">
                                             <LogOut />
                                             <span>Sign Out</span>
