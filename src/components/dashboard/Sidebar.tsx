@@ -14,14 +14,14 @@ import {
     useSidebar,
 } from "@/components/ui/sidebar"
 import { useAuth } from "@/hooks/useAuth"
+import ProfileSetup from "./ProfileSetup"
 import useUserStore from "@/stores/userStore"
 import { useEffect } from "react"
-import ProfileSetup from "./ProfileSetup"
 
 const items = [
     {
         title: "Home",
-        url: "#",
+        url: "home",
         icon: Home,
     },
     {
@@ -43,11 +43,13 @@ const items = [
 
 const AppSidebar = () => {
     const { signOut, isLoading, error } = useAuth()
-    const { updateCurrentUser } = useUserStore()
     const { isMobile } = useSidebar();
+    const { updateCurrentUser } = useUserStore();
 
     useEffect(() => {
-        updateCurrentUser();
+        if (!localStorage.getItem("currentUser")) {
+            updateCurrentUser();
+        }
     }, [])
 
     return (

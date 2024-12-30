@@ -45,20 +45,19 @@ const ProfileSetup = ({ editMode }: { editMode?: boolean }) => {
     const { setValue } = form;
 
     useEffect(() => {
-        updateCurrentUser();
-    }, [])
-
-    useEffect(() => {
-        if (user?.user_metadata?.full_name) {
-            setValue('displayName', user.user_metadata.full_name)
+        if (user) {
+            const { user_metadata, id, email } = user;
+            if (user_metadata?.full_name || userProfile?.displayName) {
+                setValue('displayName', userProfile?.displayName || user_metadata.full_name)
+            }
+            if (id) {
+                setValue('id', id)
+            }
+            if (email) {
+                setValue('email', email)
+            }
         }
-        if (user?.id) {
-            setValue('id', user.id)
-        }
-        if (user?.email) {
-            setValue('email', user.email)
-        }
-    }, [user])
+    }, [user, userProfile])
 
     const onSubmit = async (userProfilePayload: PartialUpdateUserProfileType) => {
         if (!user) {

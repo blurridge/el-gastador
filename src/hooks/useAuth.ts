@@ -31,6 +31,7 @@ export const useAuth = () => {
     try {
       const response = await parseApiResponse(honoClient.api.auth['sign-out'].$get())
       if (response.status === RESPONSE_STATUS.SUCCESS) {
+        localStorage.removeItem("currentUser")
         router.push("/login")
       }
     } catch (error) {
