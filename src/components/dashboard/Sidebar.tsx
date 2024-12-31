@@ -47,7 +47,7 @@ const AppSidebar = () => {
     // Tip: Use <Link /> components instead of <a> tags to prevent layout rerenders
     return (
         <>
-            <Sidebar variant="floating">
+            <Sidebar variant="inset">
                 <SidebarContent>
                     <SidebarGroup>
                         <SidebarGroupContent>

@@ -1,7 +1,9 @@
-import { RESPONSE_STATUS } from '@/utils/constants';
+import { RESPONSE_STATUS, TRANSACTION_TYPE } from '@/utils/constants';
 import { z } from 'zod'
 import { createInsertSchema, createSelectSchema, createUpdateSchema } from 'drizzle-zod';
-import { transactions, userProfiles } from '@/db/schema';
+import { categories, transactions, userProfiles } from '@/db/schema';
+
+// User Schemas
 
 export const LoginSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -40,13 +42,28 @@ export const PartialUpdateUserProfileSchema = z.object({
 
 export type PartialUpdateUserProfileType = z.infer<typeof PartialUpdateUserProfileSchema>
 
+// Category Schemas
+
+export const CategorySchema = createSelectSchema(categories);
+export const CategoryInsertSchema = createInsertSchema(categories);
+export const CategoryUpdateSchema = createUpdateSchema(categories);
+
+export type CategoryType = z.infer<typeof CategorySchema>;
+export type CategoryInsertType = z.infer<typeof CategoryInsertSchema>;
+export type CategoryUpdateType = z.infer<typeof CategoryUpdateSchema>;
+
+// Transaction Schemas
+
 export const GetTransactionSchema = z.object({
   id: z.string().uuid({ message: "Invalid UUID" })
 })
 
 export type GetTransactionType = z.infer<typeof GetTransactionSchema>;
 
-export const TransactionSchema = createSelectSchema(transactions)
+export const TransactionSchema = createSelectSchema(transactions).extend({
+  category: CategorySchema.optional()
+});
+
 export const TransactionInsertSchema = createInsertSchema(transactions);
 export const TransactionUpdateSchema = createUpdateSchema(transactions);
 
@@ -55,9 +72,13 @@ export type TransactionInsertType = z.infer<typeof TransactionInsertSchema>;
 export type TransactionUpdateType = z.infer<typeof TransactionUpdateSchema>;
 
 export const PartialTransactionSchema = z.object({
-  id: z.string().uuid({ message: "Invalid transaction UUID" }).nullable(),
+  id: z.string().uuid({ message: "Invalid transaction UUID" }).optional(),
   categoryId: z.string().uuid({ message: "Invalid category UUID" }),
   userId: z.string().uuid({ message: "Invalid user UUID" }),
   amount: z.string({ message: "Amount must be casted to string due to Drizzle limitations" }),
   description: z.string().nullable(),
+  transactionType: z.enum([TRANSACTION_TYPE.INCOME, TRANSACTION_TYPE.EXPENSE])
 })
+
+export type PartialTransactionType = z.infer<typeof PartialTransactionSchema>
+

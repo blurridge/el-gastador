@@ -1,5 +1,5 @@
-export { default as transactions } from "./transactions"
 export { default as userProfiles } from "./users"
 export { default as categories } from "./categories"
+export * from "./transactions"
 export * from "./loans"
 export * from "./relations"

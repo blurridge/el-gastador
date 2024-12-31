@@ -29,6 +29,27 @@
       "when": 1735613002247,
       "tag": "0003_busy_franklin_storm",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1735626060796,
+      "tag": "0004_add_default_flag_to_categories",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1735629847275,
+      "tag": "0005_add_transaction_type_enum",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1735630023905,
+      "tag": "0006_rename_enum_columns",
+      "breakpoints": true
     }
   ]
 }
