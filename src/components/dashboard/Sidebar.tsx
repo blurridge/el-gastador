@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/sidebar"
 import ProfileSetup from "./ProfileSetup"
 import { useSignOut } from "@/features/auth"
+import Link from "next/link"
 
 const items = [
     {
@@ -43,6 +44,7 @@ const AppSidebar = () => {
     const { isMobile } = useSidebar();
     const { refetch: signOut } = useSignOut();
 
+    // Tip: Use <Link /> components instead of <a> tags to prevent layout rerenders
     return (
         <>
             <Sidebar variant="floating">
@@ -53,10 +55,10 @@ const AppSidebar = () => {
                                 {items.map((item) => (
                                     <SidebarMenuItem key={item.title}>
                                         <SidebarMenuButton asChild>
-                                            <a href={item.url}>
+                                            <Link href={item.url}>
                                                 <item.icon />
                                                 <span>{item.title}</span>
-                                            </a>
+                                            </Link>
                                         </SidebarMenuButton>
                                     </SidebarMenuItem>
                                 ))}
@@ -76,10 +78,10 @@ const AppSidebar = () => {
                                 </SidebarMenuItem>
                                 <SidebarMenuItem key={"Sign Out"}>
                                     <SidebarMenuButton onClick={() => signOut()} asChild>
-                                        <a className="cursor-pointer">
+                                        <div className="cursor-pointer">
                                             <LogOut />
                                             <span>Sign Out</span>
-                                        </a>
+                                        </div>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
                             </SidebarMenu>

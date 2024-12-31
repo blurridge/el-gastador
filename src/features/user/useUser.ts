@@ -22,7 +22,6 @@ export const useGetUserInfo = () => {
                 return null
             }
         },
-        staleTime: Infinity,
         queryKey: keys.getUserInfo
     })
 }
@@ -42,7 +41,6 @@ export const useGetUserProfile = (user: User) => {
             }
         } : skipToken,
         queryKey: user ? [...keys.getUserProfile, user.id] : keys.skip,
-        staleTime: Infinity,
         enabled: !!user
     })
 }
