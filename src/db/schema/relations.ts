@@ -1,7 +1,7 @@
 import { relations } from "drizzle-orm";
 import userProfiles from "./users";
 import { loans } from "./loans";
-import categories from "./categories";
+import { categories } from "./categories";
 import { transactions } from "./transactions";
 
 export const userProfilesRelations = relations(userProfiles, ({ many }) => ({

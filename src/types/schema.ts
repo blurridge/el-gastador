@@ -1,4 +1,4 @@
-import { RESPONSE_STATUS, TRANSACTION_TYPE } from '@/utils/constants';
+import { RESPONSE_STATUS } from '@/utils/constants';
 import { z } from 'zod'
 import { createInsertSchema, createSelectSchema, createUpdateSchema } from 'drizzle-zod';
 import { categories, transactions, userProfiles } from '@/db/schema';
@@ -77,7 +77,6 @@ export const PartialTransactionSchema = z.object({
   userId: z.string().uuid({ message: "Invalid user UUID" }),
   amount: z.string({ message: "Amount must be casted to string due to Drizzle limitations" }),
   description: z.string().nullable(),
-  transactionType: z.enum([TRANSACTION_TYPE.INCOME, TRANSACTION_TYPE.EXPENSE])
 })
 
 export type PartialTransactionType = z.infer<typeof PartialTransactionSchema>

@@ -24,7 +24,7 @@ const transactionRoutes = new Hono()
                     with: {
                         category: true
                     }
-                }) || []
+                })
                 if (!transactionData || !transactionData.length) {
                     return c.json(createResponse({ status: RESPONSE_STATUS.FAIL, message: "No transactions available.", data: [] }))
                 }
@@ -45,7 +45,6 @@ const transactionRoutes = new Hono()
                         set: {
                             amount: validatedUserTransactionPayload.amount,
                             description: validatedUserTransactionPayload.description,
-                            transactionType: validatedUserTransactionPayload.transactionType,
                             categoryId: validatedUserTransactionPayload.categoryId,
                             updatedAt: new Date()
                         }
