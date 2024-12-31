@@ -53,3 +53,11 @@ export const TransactionUpdateSchema = createUpdateSchema(transactions);
 export type TransactionType = z.infer<typeof TransactionSchema>;
 export type TransactionInsertType = z.infer<typeof TransactionInsertSchema>;
 export type TransactionUpdateType = z.infer<typeof TransactionUpdateSchema>;
+
+export const PartialTransactionSchema = z.object({
+  id: z.string().uuid({ message: "Invalid transaction UUID" }).nullable(),
+  categoryId: z.string().uuid({ message: "Invalid category UUID" }),
+  userId: z.string().uuid({ message: "Invalid user UUID" }),
+  amount: z.string({ message: "Amount must be casted to string due to Drizzle limitations" }),
+  description: z.string().nullable(),
+})

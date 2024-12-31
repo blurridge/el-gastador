@@ -5,7 +5,7 @@ import categories from "./categories";
 
 const transactions = pgTable("transactions", {
     amount: numeric("amount").notNull(),
-    description: varchar("description", { length: 256 }).notNull(),
+    description: varchar("description", { length: 256 }),
     categoryId: uuid("category_id").references(() => categories.id, { onDelete: 'set null' }).notNull(),
     userId: uuid("user_id").references(() => userProfiles.id, { onDelete: 'cascade' }).notNull(),
     ...baseColumns
