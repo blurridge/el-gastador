@@ -25,7 +25,7 @@ import Image from "next/image"
 import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form";
 
-const ProfileSetup = ({ editMode }: { editMode?: boolean }) => {
+const ProfileSetupModal = ({ editMode }: { editMode?: boolean }) => {
     const [open, setOpen] = useState(false);
     const { data: user, isLoading: isLoadingUser } = useGetUserInfo();
     const { data: userProfile, isLoading: isLoadingUserProfile } = useGetUserProfile(user!);
@@ -68,7 +68,7 @@ const ProfileSetup = ({ editMode }: { editMode?: boolean }) => {
     return (
         <Dialog open={open || !userProfile} onOpenChange={setOpen}>
             {editMode ? <DialogTrigger asChild>
-                <a className="flex gap-2 cursor-pointer">
+                <a className="flex gap-2 cursor-pointer items-center">
                     {user?.user_metadata.picture ? <Image
                         width={200}
                         height={200}
@@ -123,4 +123,4 @@ const ProfileSetup = ({ editMode }: { editMode?: boolean }) => {
     )
 }
 
-export default ProfileSetup;
+export default ProfileSetupModal;

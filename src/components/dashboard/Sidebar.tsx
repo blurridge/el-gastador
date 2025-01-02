@@ -13,7 +13,7 @@ import {
     SidebarTrigger,
     useSidebar,
 } from "@/components/ui/sidebar"
-import ProfileSetup from "./ProfileSetup"
+import ProfileSetupModal from "./ProfileSetupModal"
 import { useSignOut } from "@/features/auth"
 import Link from "next/link"
 
@@ -73,7 +73,7 @@ const AppSidebar = () => {
                             <SidebarMenu>
                                 <SidebarMenuItem key={"Account Details"}>
                                     <SidebarMenuButton asChild>
-                                        <ProfileSetup editMode={true} />
+                                        <ProfileSetupModal editMode={true} />
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
                                 <SidebarMenuItem key={"Sign Out"}>

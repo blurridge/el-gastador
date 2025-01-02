@@ -44,6 +44,12 @@ export type PartialUpdateUserProfileType = z.infer<typeof PartialUpdateUserProfi
 
 // Category Schemas
 
+export const GetCategorySchema = z.object({
+  id: z.string().uuid({ message: "Invalid UUID" })
+})
+
+export type GetCategoryType = z.infer<typeof GetCategorySchema>;
+
 export const CategorySchema = createSelectSchema(categories);
 export const CategoryInsertSchema = createInsertSchema(categories);
 export const CategoryUpdateSchema = createUpdateSchema(categories);
@@ -72,11 +78,11 @@ export type TransactionInsertType = z.infer<typeof TransactionInsertSchema>;
 export type TransactionUpdateType = z.infer<typeof TransactionUpdateSchema>;
 
 export const PartialTransactionSchema = z.object({
-  id: z.string().uuid({ message: "Invalid transaction UUID" }).optional(),
+  id: z.optional(z.string().uuid({ message: "Invalid transaction UUID" })),
   categoryId: z.string().uuid({ message: "Invalid category UUID" }),
   userId: z.string().uuid({ message: "Invalid user UUID" }),
   amount: z.string({ message: "Amount must be casted to string due to Drizzle limitations" }),
-  description: z.string().nullable(),
+  description: z.optional(z.string()),
 })
 
 export type PartialTransactionType = z.infer<typeof PartialTransactionSchema>

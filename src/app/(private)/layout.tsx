@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
 import AppSidebar from "@/components/dashboard/Sidebar";
-import ProfileSetup from "@/components/dashboard/ProfileSetup";
+import ProfileSetupModal from "@/components/dashboard/ProfileSetupModal";
 
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
@@ -9,7 +9,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
       <AppSidebar />
       <SidebarInset>
         <main className="w-full h-full">
-          <ProfileSetup />
+          <ProfileSetupModal />
           {children}
         </main>
       </SidebarInset>
