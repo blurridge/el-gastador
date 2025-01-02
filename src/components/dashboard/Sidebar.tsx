@@ -1,5 +1,5 @@
-'use client'
-import { Home, Settings, LogOut, HandCoins, Coins } from "lucide-react"
+'use client';
+import { Home, Settings, LogOut, HandCoins, Coins } from 'lucide-react';
 import {
     Sidebar,
     SidebarContent,
@@ -12,33 +12,33 @@ import {
     SidebarMenuItem,
     SidebarTrigger,
     useSidebar,
-} from "@/components/ui/sidebar"
-import ProfileSetupModal from "./ProfileSetupModal"
-import { useSignOut } from "@/features/auth"
-import Link from "next/link"
+} from '@/components/ui/sidebar';
+import ProfileSetupModal from './ProfileSetupModal';
+import { useSignOut } from '@/features/auth';
+import Link from 'next/link';
 
 const items = [
     {
-        title: "Home",
-        url: "home",
+        title: 'Home',
+        url: 'home',
         icon: Home,
     },
     {
-        title: "Transactions",
-        url: "transactions",
+        title: 'Transactions',
+        url: 'transactions',
         icon: Coins,
     },
     {
-        title: "Debt",
-        url: "debt",
-        icon: HandCoins
+        title: 'Debt',
+        url: 'debt',
+        icon: HandCoins,
     },
     {
-        title: "Settings",
-        url: "#",
+        title: 'Settings',
+        url: '#',
         icon: Settings,
     },
-]
+];
 
 const AppSidebar = () => {
     const { isMobile } = useSidebar();
@@ -71,12 +71,12 @@ const AppSidebar = () => {
                         <SidebarGroupLabel>Account</SidebarGroupLabel>
                         <SidebarGroupContent>
                             <SidebarMenu>
-                                <SidebarMenuItem key={"Account Details"}>
+                                <SidebarMenuItem key={'Account Details'}>
                                     <SidebarMenuButton asChild>
                                         <ProfileSetupModal editMode={true} />
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
-                                <SidebarMenuItem key={"Sign Out"}>
+                                <SidebarMenuItem key={'Sign Out'}>
                                     <SidebarMenuButton onClick={() => signOut()} asChild>
                                         <div className="cursor-pointer">
                                             <LogOut />
@@ -91,7 +91,7 @@ const AppSidebar = () => {
             </Sidebar>
             {isMobile ? <SidebarTrigger /> : null}
         </>
-    )
-}
+    );
+};
 
 export default AppSidebar;

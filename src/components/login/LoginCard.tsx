@@ -1,38 +1,25 @@
-'use client'
-import { zodResolver } from '@hookform/resolvers/zod'
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from '@/components/ui/form'
-import { Button } from '@/components/ui/button'
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Separator } from "@/components/ui/separator"
-import { LoginSchema, LoginType } from '@/types/schema'
-import { useForm } from 'react-hook-form'
-import GoogleSignIn from './GoogleSignIn'
+'use client';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Separator } from '@/components/ui/separator';
+import { LoginSchema, LoginType } from '@/types/schema';
+import { useForm } from 'react-hook-form';
+import GoogleSignIn from './GoogleSignIn';
 
 const LoginCard = () => {
     const form = useForm<LoginType>({
         resolver: zodResolver(LoginSchema),
         defaultValues: {
-            email: "",
-            password: ""
+            email: '',
+            password: '',
         },
     });
     const onSubmit = (values: LoginType) => {
         console.log(values);
-    }
+    };
     return (
         <Card className="w-[400px]">
             <CardHeader className="flex justify-center items-center">
@@ -73,7 +60,9 @@ const LoginCard = () => {
                             )}
                         />
                         <div className="flex justify-center items-center">
-                            <Button type="submit" className="w-full" variant="neutral">Login</Button>
+                            <Button type="submit" className="w-full" variant="neutral">
+                                Login
+                            </Button>
                         </div>
                         <div className="flex justify-center items-center">
                             <span className="text-sm font-base">Not from around here? Create an account.</span>
@@ -82,7 +71,7 @@ const LoginCard = () => {
                 </Form>
             </CardContent>
         </Card>
-    )
-}
+    );
+};
 
 export default LoginCard;

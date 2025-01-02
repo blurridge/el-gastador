@@ -1,14 +1,14 @@
-'use client'
+'use client';
 
-import { useGetUserTransactions } from "@/features/transactions";
-import { DataTable } from "../ui/data-table";
-import { TransactionColumns } from "./TransactionColumns";
-import { useGetUserInfo } from "@/features/user";
-import AddTransactionModal from "./AddTransactionModal";
+import { useGetUserTransactions } from '@/features/transactions';
+import { DataTable } from '../ui/data-table';
+import { TransactionColumns } from './TransactionColumns';
+import { useGetUserInfo } from '@/features/user';
+import AddTransactionModal from './AddTransactionModal';
 
 const TransactionTable = () => {
     const { data: user, isLoading: isLoadingUser } = useGetUserInfo();
-    const { data, isLoading: isLoadingTransactions, isError } = useGetUserTransactions(user!)
+    const { data, isLoading: isLoadingTransactions, isError } = useGetUserTransactions(user!);
     if (isLoadingTransactions || isLoadingUser) {
         return null;
     }
@@ -22,7 +22,7 @@ const TransactionTable = () => {
                 <DataTable columns={TransactionColumns} data={data} />
             </div>
         </>
-    )
-}
+    );
+};
 
 export default TransactionTable;
