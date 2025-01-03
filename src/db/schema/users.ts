@@ -1,5 +1,7 @@
-import { pgTable, uuid, pgSchema, varchar } from 'drizzle-orm/pg-core';
+import { pgTable, uuid, pgSchema, varchar, pgPolicy } from 'drizzle-orm/pg-core';
 import { baseColumns } from '../helpers/columns.helper';
+import { authenticatedRole } from 'drizzle-orm/supabase';
+import { sql } from 'drizzle-orm';
 
 const authSchema = pgSchema('auth');
 
@@ -9,7 +11,7 @@ const users = authSchema.table('users', {
 
 const { id, ...restBaseColumns } = baseColumns;
 
-const userProfiles = pgTable('user_profiles', {
+export const userProfiles = pgTable('user_profiles', {
     id: uuid('id')
         .primaryKey()
         .references(() => users.id, { onDelete: 'cascade' }),
@@ -18,4 +20,9 @@ const userProfiles = pgTable('user_profiles', {
     ...restBaseColumns,
 });
 
-export default userProfiles;
+export const userProfilesPolicy = pgPolicy('user_profiles_policy', {
+    for: 'all',
+    to: authenticatedRole,
+    using: sql`${userProfiles}.id = auth.uid()`,
+    withCheck: sql`${userProfiles}.id = auth.uid()`,
+}).link(userProfiles);

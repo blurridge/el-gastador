@@ -1,7 +1,9 @@
-import { pgTable, uuid, numeric, varchar } from 'drizzle-orm/pg-core';
+import { pgTable, uuid, numeric, varchar, pgPolicy } from 'drizzle-orm/pg-core';
 import { baseColumns } from '../helpers/columns.helper';
-import userProfiles from './users';
 import { categories } from './categories';
+import { authenticatedRole } from 'drizzle-orm/supabase';
+import { sql } from 'drizzle-orm';
+import { userProfiles } from './users';
 
 export const transactions = pgTable('transactions', {
     amount: numeric('amount').notNull(),
@@ -14,3 +16,10 @@ export const transactions = pgTable('transactions', {
         .notNull(),
     ...baseColumns,
 });
+
+export const transactionPolicy = pgPolicy('transactions_policy', {
+    for: 'all',
+    to: authenticatedRole,
+    using: sql`${transactions}.user_id = auth.uid()`,
+    withCheck: sql`${transactions}.user_id = auth.uid()`,
+}).link(transactions);
