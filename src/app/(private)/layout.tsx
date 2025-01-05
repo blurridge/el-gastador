@@ -1,7 +1,8 @@
 import { ReactNode } from 'react';
-import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
-import AppSidebar from '@/components/dashboard/Sidebar';
+
 import ProfileSetupModal from '@/components/dashboard/ProfileSetupModal';
+import AppSidebar from '@/components/dashboard/Sidebar';
+import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 
 const Layout = ({ children }: { children: ReactNode }) => {
     return (

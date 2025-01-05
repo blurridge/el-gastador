@@ -1,10 +1,12 @@
 'use client';
 
-import { useGetUserTransactions } from '@/features/transactions';
 import { DataTable } from '../ui/data-table';
-import { TransactionColumns } from './TransactionColumns';
+
+import { useGetUserTransactions } from '@/features/transactions';
 import { useGetUserInfo } from '@/features/user';
+
 import AddTransactionModal from './AddTransactionModal';
+import { TransactionColumns } from './TransactionColumns';
 
 const TransactionTable = () => {
     const { data: user, isLoading: isLoadingUser } = useGetUserInfo();

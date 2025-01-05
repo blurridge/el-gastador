@@ -1,6 +1,7 @@
 import { relations } from 'drizzle-orm';
-import { loans } from './loans';
+
 import { categories } from './categories';
+import { loans } from './loans';
 import { transactions } from './transactions';
 import { userProfiles } from './users';
 

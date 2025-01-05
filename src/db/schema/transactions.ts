@@ -1,8 +1,9 @@
-import { pgTable, uuid, numeric, varchar, pgPolicy } from 'drizzle-orm/pg-core';
 import { baseColumns } from '../helpers/columns.helper';
-import { categories } from './categories';
-import { authenticatedRole } from 'drizzle-orm/supabase';
 import { sql } from 'drizzle-orm';
+import { numeric, pgPolicy, pgTable, uuid, varchar } from 'drizzle-orm/pg-core';
+import { authenticatedRole } from 'drizzle-orm/supabase';
+
+import { categories } from './categories';
 import { userProfiles } from './users';
 
 export const transactions = pgTable('transactions', {

@@ -1,4 +1,4 @@
-import { uuid, timestamp } from 'drizzle-orm/pg-core';
+import { timestamp, uuid } from 'drizzle-orm/pg-core';
 
 export const baseColumns = {
     id: uuid('id').defaultRandom().primaryKey(),

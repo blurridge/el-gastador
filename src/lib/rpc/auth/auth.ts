@@ -1,10 +1,12 @@
 import { Hono } from 'hono';
-import { HTTPException } from 'hono/http-exception';
-import { createSupabaseServerClient } from '@/lib/supabase/server';
-import { createResponse } from '@/utils/createResponse';
-import { RESPONSE_STATUS } from '@/utils/constants';
-import { generateUrl } from '@/utils/generateUrl';
 import { deleteCookie, setCookie } from 'hono/cookie';
+import { HTTPException } from 'hono/http-exception';
+
+import { createSupabaseServerClient } from '@/lib/supabase/server';
+
+import { RESPONSE_STATUS } from '@/utils/constants';
+import { createResponse } from '@/utils/createResponse';
+import { generateUrl } from '@/utils/generateUrl';
 
 const authRoutes = new Hono()
     .get('/sign-in-with-provider', async (c) => {

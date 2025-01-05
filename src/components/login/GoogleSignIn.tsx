@@ -1,8 +1,12 @@
 'use client';
-import { Button } from '@/components/ui/button';
-import googleIcon from '@/assets/icons/google_icon.svg';
+
 import Image from 'next/image';
+
+import { Button } from '@/components/ui/button';
+
 import { useGoogleSignIn } from '@/features/auth';
+
+import googleIcon from '@/assets/icons/google_icon.svg';
 
 const GoogleSignIn = () => {
     const { refetch: signInWithGoogle } = useGoogleSignIn();

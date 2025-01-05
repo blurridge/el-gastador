@@ -1,8 +1,9 @@
 import { Hono } from 'hono';
-import { handle } from 'hono/vercel';
-import { authRoutes, categoryRoutes, profileRoutes, transactionRoutes } from '@/lib/rpc';
 import { cors } from 'hono/cors';
 import { logger } from 'hono/logger';
+import { handle } from 'hono/vercel';
+
+import { authRoutes, categoryRoutes, profileRoutes, transactionRoutes } from '@/lib/rpc';
 
 const app = new Hono().basePath('/api').use('*', logger()).use('*', cors());
 

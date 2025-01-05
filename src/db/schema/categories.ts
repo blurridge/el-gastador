@@ -1,7 +1,8 @@
-import { boolean, pgEnum, pgPolicy, pgTable, uuid, varchar } from 'drizzle-orm/pg-core';
 import { baseColumns } from '../helpers/columns.helper';
-import { authenticatedRole } from 'drizzle-orm/supabase';
 import { sql } from 'drizzle-orm';
+import { boolean, pgEnum, pgPolicy, pgTable, uuid, varchar } from 'drizzle-orm/pg-core';
+import { authenticatedRole } from 'drizzle-orm/supabase';
+
 import { userProfiles } from './users';
 
 export const transactionTypeEnum = pgEnum('transaction_type', ['income', 'expense']);

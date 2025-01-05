@@ -1,10 +1,13 @@
-import { useToast } from '@/hooks/use-toast';
-import honoClient from '@/lib/rpc/client/hono-client';
-import { PartialUpdateUserProfileType, UserProfileType } from '@/types/schema';
-import { RESPONSE_STATUS } from '@/utils/constants';
-import { parseApiResponse } from '@/utils/parseResponse';
 import { User } from '@supabase/supabase-js';
 import { skipToken, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+
+import honoClient from '@/lib/rpc/client/hono-client';
+
+import { PartialUpdateUserProfileType, UserProfileType } from '@/types/schema';
+
+import { useToast } from '@/hooks/use-toast';
+import { RESPONSE_STATUS } from '@/utils/constants';
+import { parseApiResponse } from '@/utils/parseResponse';
 
 const keys = {
     getUserInfo: ['user-info'],

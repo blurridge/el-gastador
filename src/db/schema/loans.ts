@@ -1,7 +1,8 @@
-import { numeric, pgEnum, pgPolicy, pgTable, timestamp, uuid, varchar } from 'drizzle-orm/pg-core';
 import { baseColumns } from '../helpers/columns.helper';
 import { sql } from 'drizzle-orm';
+import { numeric, pgEnum, pgPolicy, pgTable, timestamp, uuid, varchar } from 'drizzle-orm/pg-core';
 import { authenticatedRole } from 'drizzle-orm/supabase';
+
 import { userProfiles } from './users';
 
 export const loanTypeEnum = pgEnum('loan_type', ['lender', 'borrower']);

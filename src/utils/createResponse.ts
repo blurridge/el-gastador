@@ -1,4 +1,5 @@
 import { ResponseSchema, ResponseType } from '@/types/schema';
+
 import { RESPONSE_STATUS } from './constants';
 
 export const createResponse = ({ status, message, data }: ResponseType) => {

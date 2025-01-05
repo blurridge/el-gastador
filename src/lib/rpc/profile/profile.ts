@@ -1,13 +1,15 @@
-import { Hono } from 'hono';
-import { HTTPException } from 'hono/http-exception';
-import { createResponse } from '@/utils/createResponse';
-import { RESPONSE_STATUS } from '@/utils/constants';
 import authMiddleware from '../middleware/authMiddleware';
 import { zValidator } from '@hono/zod-validator';
+import { eq } from 'drizzle-orm';
+import { Hono } from 'hono';
+import { HTTPException } from 'hono/http-exception';
+
 import { GetProfileSchema, PartialUpdateUserProfileSchema } from '@/types/schema';
+
 import { db } from '@/db';
 import { userProfiles } from '@/db/schema';
-import { eq } from 'drizzle-orm';
+import { RESPONSE_STATUS } from '@/utils/constants';
+import { createResponse } from '@/utils/createResponse';
 
 const profileRoutes = new Hono()
     .use('*', authMiddleware)

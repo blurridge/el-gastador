@@ -1,7 +1,8 @@
 'use client';
 
-import { TransactionType } from '@/types/schema';
 import { ColumnDef } from '@tanstack/react-table';
+
+import { TransactionType } from '@/types/schema';
 
 export const TransactionColumns: ColumnDef<TransactionType>[] = [
     {

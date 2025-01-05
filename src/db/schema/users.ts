@@ -1,7 +1,7 @@
-import { pgTable, uuid, pgSchema, varchar, pgPolicy } from 'drizzle-orm/pg-core';
 import { baseColumns } from '../helpers/columns.helper';
-import { authenticatedRole } from 'drizzle-orm/supabase';
 import { sql } from 'drizzle-orm';
+import { pgPolicy, pgSchema, pgTable, uuid, varchar } from 'drizzle-orm/pg-core';
+import { authenticatedRole } from 'drizzle-orm/supabase';
 
 const authSchema = pgSchema('auth');
 

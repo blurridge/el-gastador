@@ -1,5 +1,8 @@
 'use client';
-import { Home, Settings, LogOut, HandCoins, Coins } from 'lucide-react';
+
+import { Coins, HandCoins, Home, LogOut, Settings } from 'lucide-react';
+import Link from 'next/link';
+
 import {
     Sidebar,
     SidebarContent,
@@ -13,9 +16,10 @@ import {
     SidebarTrigger,
     useSidebar,
 } from '@/components/ui/sidebar';
-import ProfileSetupModal from './ProfileSetupModal';
+
 import { useSignOut } from '@/features/auth';
-import Link from 'next/link';
+
+import ProfileSetupModal from './ProfileSetupModal';
 
 const items = [
     {

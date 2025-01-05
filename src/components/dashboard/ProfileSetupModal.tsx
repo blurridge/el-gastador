@@ -1,16 +1,21 @@
 'use client';
-import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { useGetUserInfo, useGetUserProfile, useUpdateUserProfile } from '@/features/user';
-import { cn } from '@/lib/utils';
-import { PartialUpdateUserProfileSchema, PartialUpdateUserProfileType } from '@/types/schema';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import { DialogTrigger } from '@radix-ui/react-dialog';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+
+import { cn } from '@/lib/utils';
+
+import { useGetUserInfo, useGetUserProfile, useUpdateUserProfile } from '@/features/user';
+
+import { PartialUpdateUserProfileSchema, PartialUpdateUserProfileType } from '@/types/schema';
 
 const ProfileSetupModal = ({ editMode }: { editMode?: boolean }) => {
     const [open, setOpen] = useState(false);

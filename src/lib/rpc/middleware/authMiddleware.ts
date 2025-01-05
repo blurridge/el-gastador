@@ -1,7 +1,8 @@
-import { createSupabaseServerClient } from '@/lib/supabase/server';
 import { type MiddlewareHandler } from 'hono';
 import { getCookie } from 'hono/cookie';
 import { HTTPException } from 'hono/http-exception';
+
+import { createSupabaseServerClient } from '@/lib/supabase/server';
 
 const authMiddleware: MiddlewareHandler = async (c, next) => {
     const refresh_token = getCookie(c, 'refresh_token');
