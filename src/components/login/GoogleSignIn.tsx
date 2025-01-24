@@ -9,12 +9,12 @@ import { useGoogleSignIn } from '@/features/auth';
 import googleIcon from '@/assets/icons/google_icon.svg';
 
 const GoogleSignIn = () => {
-    const { refetch: signInWithGoogle } = useGoogleSignIn();
-    return (
-        <Button onClick={() => signInWithGoogle()} className="w-full" variant="neutral">
-            <Image src={googleIcon} alt="Google Icon" width={24} height={24} />
-        </Button>
-    );
+  const { refetch: signInWithGoogle } = useGoogleSignIn();
+  return (
+    <Button onClick={() => signInWithGoogle()} className="w-full" variant="neutral">
+      <Image src={googleIcon} alt="Google Icon" width={24} height={24} />
+    </Button>
+  );
 };
 
 export default GoogleSignIn;

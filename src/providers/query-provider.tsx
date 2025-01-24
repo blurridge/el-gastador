@@ -5,16 +5,16 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import React, { ReactNode, useState } from 'react';
 
 interface Props {
-    children: ReactNode;
+  children: ReactNode;
 }
 
 export default function QueryProvider({ children }: Props) {
-    const [queryClient] = useState(() => new QueryClient());
+  const [queryClient] = useState(() => new QueryClient());
 
-    return (
-        <QueryClientProvider client={queryClient}>
-            <ReactQueryDevtools initialIsOpen={false} />
-            <main>{children}</main>
-        </QueryClientProvider>
-    );
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
+      <main>{children}</main>
+    </QueryClientProvider>
+  );
 }

@@ -7,27 +7,27 @@ import './globals.css';
 import QueryProvider from '@/providers/query-provider';
 
 const publicSans = Public_Sans({
-    subsets: ['latin'],
+  subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
-    title: 'El Gastador',
-    description: 'A web application for budget tracking',
+  title: 'El Gastador',
+  description: 'A web application for budget tracking',
 };
 
 export default function RootLayout({
-    children,
+  children,
 }: Readonly<{
-    children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
-    return (
-        <html lang="en">
-            <body className={`${publicSans.className} ${publicSans.className} antialiased`}>
-                <QueryProvider>
-                    {children}
-                    <Toaster />
-                </QueryProvider>
-            </body>
-        </html>
-    );
+  return (
+    <html lang="en">
+      <body className={`${publicSans.className} ${publicSans.className} antialiased`}>
+        <QueryProvider>
+          {children}
+          <Toaster />
+        </QueryProvider>
+      </body>
+    </html>
+  );
 }

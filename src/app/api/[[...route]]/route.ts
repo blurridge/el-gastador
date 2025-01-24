@@ -8,10 +8,10 @@ import { authRoutes, categoryRoutes, profileRoutes, transactionRoutes } from '@/
 const app = new Hono().basePath('/api').use('*', logger()).use('*', cors());
 
 const routes = app
-    .route('/auth', authRoutes)
-    .route('/profile', profileRoutes)
-    .route('/transactions', transactionRoutes)
-    .route('/categories', categoryRoutes);
+  .route('/auth', authRoutes)
+  .route('/profile', profileRoutes)
+  .route('/transactions', transactionRoutes)
+  .route('/categories', categoryRoutes);
 
 export const GET = handle(app);
 export const POST = handle(app);
